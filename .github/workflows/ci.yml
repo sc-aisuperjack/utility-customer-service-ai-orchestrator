@@ -52,6 +52,10 @@ jobs:
         run: |
           python scripts/journey_report.py
 
+      - name: Compare prompt versions
+        run: |
+          python scripts/compare_prompt_versions.py
+
       - name: Run Lex/Lambda simulation
         run: |
           python scripts/simulate_lex_high_bill.py

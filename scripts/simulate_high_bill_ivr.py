@@ -86,7 +86,7 @@ def main():
 
     say(
         "CONNECT",
-        "Welcome to British Gas. How can I help you today?"
+        "Welcome to Utility Company. How can I help you today?"
     )
 
     # customer_message = "My bill is much higher than usual."

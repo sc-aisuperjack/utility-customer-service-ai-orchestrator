@@ -539,6 +539,7 @@ v0.1.0 — initial responsible AI orchestration lab
 v0.2.0 — public cleanup and CI validation
 v0.3.0 — prompt version comparison release gate
 v0.4.0 — observability and journey metrics report
+v0.5.0 - Docker quick-start guide
 ```
 
 ---

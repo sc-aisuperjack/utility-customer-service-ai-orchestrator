@@ -1,7 +1,9 @@
 services:
-  ai-lab:
+  app:
     build: .
+    container_name: responsible-contact-centre-ai-lab
     ports:
-      - "8000:8000"
-    env_file:
-      - .env
+      - "8001:8001"
+    environment:
+      MODEL_PROVIDER: local
+      PROMPT_VERSION: utility_assistant_v1

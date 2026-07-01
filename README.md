@@ -23,7 +23,7 @@ The lab demonstrates how a customer-service AI system can combine:
 
 The default mode is fully local and deterministic, so the project can be run and tested without using paid model APIs.
 
----
+
 
 ## What this project simulates
 
@@ -43,11 +43,11 @@ It can handle journeys such as:
 
 The goal is not to build a perfect chatbot. The goal is to demonstrate how regulated AI workflows can be structured, tested and released safely.
 
----
+
 
 ## Architecture
 
-```text
+
 Customer voice/chat
   ↓
 Amazon Connect-style contact flow / web chat
@@ -69,10 +69,7 @@ Output safety checks
 Customer response or human handoff
   ↓
 Observability, evaluations and release governance
-```
-````
 
----
 
 ## Key behaviours
 
@@ -100,7 +97,7 @@ The assistant gives short safety-first guidance and routes to urgent support.
 
 The assistant blocks attempts to reveal hidden instructions or bypass safety rules.
 
----
+
 
 ## Quick start
 

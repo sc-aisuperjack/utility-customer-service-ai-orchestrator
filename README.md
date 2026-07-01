@@ -49,27 +49,26 @@ The goal is not to build a perfect chatbot. The goal is to demonstrate how regul
 ## Architecture
 
 Customer voice/chat
-  ↓
+↓
 Amazon Connect-style contact flow / web chat
-  ↓
+↓
 Lex-style intent capture / routing
-  ↓
+↓
 Lambda / FastAPI orchestration
-  ↓
+↓
 Input guardrails
-  ↓
+↓
 Retrieval from approved knowledge
-  ↓
+↓
 Tool calls to mocked CRM/billing/meter/appointment/complaint systems
-  ↓
+↓
 Local deterministic model or optional Bedrock model
-  ↓
+↓
 Output safety checks
-  ↓
+↓
 Customer response or human handoff
-  ↓
+↓
 Observability, evaluations and release governance
-
 
 ## Key behaviours
 
@@ -145,6 +144,33 @@ pip install -r requirements.txt
 copy .env.example .env
 
 uvicorn app.main:app --reload --port 8001
+```
+
+---
+
+## Docker quick start
+
+```bash
+docker compose up --build
+```
+
+Open:
+
+```text
+http://localhost:8001
+```
+
+Stop the app:
+
+```bash
+docker compose down
+```
+
+Docker runs in local deterministic mode by default:
+
+```env
+MODEL_PROVIDER=local
+PROMPT_VERSION=utility_assistant_v1
 ```
 
 ---
@@ -234,15 +260,15 @@ This compares configured assistant instruction versions against the same golden 
 
 It reports:
 
-* pass/fail by prompt version
-* expected vs actual intent
-* handoff decision
-* risk flags
-* answer word count
-* voice suitability
-* retrieved articles
-* tool calls
-* output safety status
+- pass/fail by prompt version
+- expected vs actual intent
+- handoff decision
+- risk flags
+- answer word count
+- voice suitability
+- retrieved articles
+- tool calls
+- output safety status
 
 It writes:
 
@@ -267,19 +293,19 @@ This generates a local observability export across representative customer-servi
 
 It reports:
 
-* journey name
-* detected intent
-* risk flags
-* handoff decision
-* handoff queue
-* Connect-style next action
-* recommended next action
-* retrieved article IDs
-* tool calls
-* output safety status
-* answer word count
-* prompt version
-* model provider
+- journey name
+- detected intent
+- risk flags
+- handoff decision
+- handoff queue
+- Connect-style next action
+- recommended next action
+- retrieved article IDs
+- tool calls
+- output safety status
+- answer word count
+- prompt version
+- model provider
 
 It writes:
 
@@ -334,13 +360,13 @@ PROMPT_VERSION=utility_assistant_v1
 
 Local mode uses deterministic responses, which makes it suitable for:
 
-* regression tests
-* golden-case evaluations
-* CI checks
-* behaviour design
-* prompt release governance
-* local observability reports
-* safe local development
+- regression tests
+- golden-case evaluations
+- CI checks
+- behaviour design
+- prompt release governance
+- local observability reports
+- safe local development
 
 ---
 
@@ -376,13 +402,13 @@ GitHub Actions runs the project validation gate on push and pull request.
 
 The CI workflow checks:
 
-* public safety scan
-* regression tests
-* golden-case evals
-* journey safety report
-* Lex/Lambda-style simulation
-* prompt-version comparison
-* observability journey metrics
+- public safety scan
+- regression tests
+- golden-case evals
+- journey safety report
+- Lex/Lambda-style simulation
+- prompt-version comparison
+- observability journey metrics
 
 This keeps behaviour changes visible and prevents unsafe changes from being merged silently.
 
@@ -523,13 +549,13 @@ This repository uses fictional data, mocked tools and local knowledge articles.
 
 It does not contain:
 
-* real customer data
-* real account data
-* real supplier policy
-* real payment instructions
-* real emergency procedures
-* production credentials
-* production infrastructure configuration
+- real customer data
+- real account data
+- real supplier policy
+- real payment instructions
+- real emergency procedures
+- production credentials
+- production infrastructure configuration
 
 Do not commit `.env`, AWS credentials, logs, account IDs or real customer information.
 
@@ -538,5 +564,3 @@ Do not commit `.env`, AWS credentials, logs, account IDs or real customer inform
 ## License
 
 MIT License.
-
-

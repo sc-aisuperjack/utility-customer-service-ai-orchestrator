@@ -1,0 +1,16 @@
+.git
+.github
+.venv
+.venv312
+__pycache__
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.env
+.env.*
+!.env.example
+*.pyc
+*.pyo
+*.pyd
+*.log
+bedrock_quotas.json

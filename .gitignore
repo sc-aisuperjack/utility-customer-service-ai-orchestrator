@@ -1,6 +1,11 @@
+.env
+.env.*
+!.env.example
 .venv/
+.venv312/
 __pycache__/
 .pytest_cache/
-.env
+bedrock_quotas.json
+*.log
 *.pyc
 .DS_Store

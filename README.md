@@ -1,5 +1,7 @@
 # Responsible Contact-Centre AI Lab
 
+![CI](https://github.com/sc-aisuperjack/utility-customer-service-ai-orchestrator/actions/workflows/ci.yml/badge.svg)
+
 A local-first AI orchestration lab for building and testing safe customer-service assistant behaviour in a regulated utility-style environment.
 
 This project is a fictional demo. It is not affiliated with any real energy supplier, employer, client, recruitment process or public-sector body.
@@ -23,8 +25,6 @@ The lab demonstrates how a customer-service AI system can combine:
 
 The default mode is fully local and deterministic, so the project can be run and tested without using paid model APIs.
 
-
-
 ## What this project simulates
 
 The project simulates a responsible customer-service assistant for an example utility provider.
@@ -43,33 +43,29 @@ It can handle journeys such as:
 
 The goal is not to build a perfect chatbot. The goal is to demonstrate how regulated AI workflows can be structured, tested and released safely.
 
-
-
 ## Architecture
 
-
 Customer voice/chat
-  ↓
+↓
 Amazon Connect-style contact flow / web chat
-  ↓
+↓
 Lex-style intent capture / routing
-  ↓
+↓
 Lambda / FastAPI orchestration
-  ↓
+↓
 Input guardrails
-  ↓
+↓
 Retrieval from approved knowledge
-  ↓
+↓
 Tool calls to mocked CRM/billing/meter/appointment/complaint systems
-  ↓
+↓
 Local deterministic model or optional Bedrock model
-  ↓
+↓
 Output safety checks
-  ↓
+↓
 Customer response or human handoff
-  ↓
+↓
 Observability, evaluations and release governance
-
 
 ## Key behaviours
 
@@ -96,8 +92,6 @@ The assistant gives short safety-first guidance and routes to urgent support.
 ### Prompt injection
 
 The assistant blocks attempts to reveal hidden instructions or bypass safety rules.
-
-
 
 ## Quick start
 
@@ -412,4 +406,3 @@ Do not commit `.env`, AWS credentials, logs, account IDs or real customer inform
 ## License
 
 MIT License.
-

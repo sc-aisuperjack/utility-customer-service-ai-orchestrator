@@ -1,0 +1,4 @@
+langgraph==0.5.1
+langchain-core==0.3.68
+langchain-aws==0.2.28
+deepeval==2.9.6

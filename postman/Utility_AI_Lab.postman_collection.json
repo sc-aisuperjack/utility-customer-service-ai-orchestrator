@@ -1,0 +1,49 @@
+{
+  "info": {
+    "name": "Utility AI Lab",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8001/health"
+      }
+    },
+    {
+      "name": "High bill",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "http://localhost:8001/chat",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"channel\": \"chat\",\n  \"customer_id\": \"CUST001\",\n  \"message\": \"My bill is much higher than usual. Can you check why?\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Vulnerability",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "http://localhost:8001/chat",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"channel\": \"voice\",\n  \"customer_id\": \"CUST002\",\n  \"message\": \"I use medical equipment and cannot afford to top up my prepayment meter\"\n}"
+        }
+      }
+    }
+  ]
+}

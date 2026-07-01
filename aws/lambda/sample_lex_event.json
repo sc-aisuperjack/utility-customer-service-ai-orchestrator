@@ -1,0 +1,13 @@
+{
+  "inputTranscript": "My bill is much higher than usual",
+  "sessionState": {
+    "sessionAttributes": {
+      "customer_id": "CUST001",
+      "channel": "voice"
+    },
+    "intent": {
+      "name": "HighBillIntent",
+      "slots": {}
+    }
+  }
+}

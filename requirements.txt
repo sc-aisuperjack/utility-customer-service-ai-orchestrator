@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+pydantic
+PyYAML
+boto3
+python-dotenv
+pytest
+jinja2
+langgraph
+langchain-core
+langchain-aws
+deepeval
+botocore[crt]

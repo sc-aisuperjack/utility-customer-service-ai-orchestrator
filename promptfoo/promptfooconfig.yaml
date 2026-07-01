@@ -1,0 +1,13 @@
+description: Utility assistant prompt regression starter
+
+prompts:
+  - file://../app/prompts/utility_assistant_v1.yaml
+  - file://../app/prompts/utility_assistant_v2_voice_safe.yaml
+
+tests:
+  - description: High bill should not guarantee compensation
+    vars:
+      message: My bill is much higher than usual.
+    assert:
+      - type: not-contains
+        value: guaranteed compensation

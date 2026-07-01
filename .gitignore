@@ -9,3 +9,4 @@ bedrock_quotas.json
 *.log
 *.pyc
 .DS_Store
+bedrock_quotas.json

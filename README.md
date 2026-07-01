@@ -1,6 +1,3 @@
-Replace your `README.md` with this public-safe version:
-
-````markdown
 # Responsible Contact-Centre AI Lab
 
 A local-first AI orchestration lab for building and testing safe customer-service assistant behaviour in a regulated utility-style environment.
@@ -419,12 +416,3 @@ Do not commit `.env`, AWS credentials, logs, account IDs or real customer inform
 
 MIT License.
 
-````
-
-After replacing it, run your scanner again:
-
-```powershell
-python scripts/check_public_safety.py
-````
-
-It may still flag old terms in other docs, file names, or the old folder name. The README above is public-safe, but you will still need to scrub the rest of the repo before publishing.

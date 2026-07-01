@@ -56,6 +56,10 @@ jobs:
         run: |
           python scripts/compare_prompt_versions.py
 
+      - name: Run observability journey metrics
+        run: |
+          python scripts/observability_report.py
+
       - name: Run Lex/Lambda simulation
         run: |
           python scripts/simulate_lex_high_bill.py

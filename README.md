@@ -20,8 +20,9 @@ The lab demonstrates how a customer-service AI system can combine:
 - Amazon Lex-style Lambda fulfilment
 - Amazon Connect-style handoff routing
 - regression tests and golden-case evaluations
-- CI/CD starter workflow
-- journey safety reporting
+- prompt-version comparison for release governance
+- local observability and journey metrics reporting
+- CI/CD validation through GitHub Actions
 
 The default mode is fully local and deterministic, so the project can be run and tested without using paid model APIs.
 
@@ -40,32 +41,35 @@ It can handle journeys such as:
 - emergency safety escalation
 - prompt-injection blocking
 - anonymous account/balance request handling
+- prompt-version comparison before release
+- journey-level observability reporting
 
-The goal is not to build a perfect chatbot. The goal is to demonstrate how regulated AI workflows can be structured, tested and released safely.
+The goal is not to build a perfect chatbot. The goal is to demonstrate how regulated AI workflows can be structured, tested, observed and released safely.
 
 ## Architecture
 
 Customer voice/chat
-↓
+  ↓
 Amazon Connect-style contact flow / web chat
-↓
+  ↓
 Lex-style intent capture / routing
-↓
+  ↓
 Lambda / FastAPI orchestration
-↓
+  ↓
 Input guardrails
-↓
+  ↓
 Retrieval from approved knowledge
-↓
+  ↓
 Tool calls to mocked CRM/billing/meter/appointment/complaint systems
-↓
+  ↓
 Local deterministic model or optional Bedrock model
-↓
+  ↓
 Output safety checks
-↓
+  ↓
 Customer response or human handoff
-↓
+  ↓
 Observability, evaluations and release governance
+
 
 ## Key behaviours
 
@@ -93,10 +97,18 @@ The assistant gives short safety-first guidance and routes to urgent support.
 
 The assistant blocks attempts to reveal hidden instructions or bypass safety rules.
 
+### Prompt version comparison
+
+The project compares assistant instruction versions against the same golden evaluation cases. This supports safer release governance by checking intent, handoff, risk flags, answer length, voice suitability, retrieval, tools and output safety before promotion.
+
+### Observability journey metrics
+
+The project generates local Markdown and JSON observability reports showing how the orchestrator behaves across representative journeys.
+
 ## Quick start
 
 ```bash
-cd responsible-contact-centre-ai-lab
+cd utility-customer-service-ai-orchestrator
 
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
@@ -124,7 +136,7 @@ http://localhost:8001/docs
 ## Windows PowerShell quick start
 
 ```powershell
-cd D:\pythondev\responsible-contact-centre-ai-lab
+cd D:\Ai Superjack\dev\utility-customer-service-ai-orchestrator
 
 python -m venv .venv
 .venv\Scripts\activate
@@ -210,6 +222,83 @@ model_provider
 
 ---
 
+## Prompt version comparison
+
+Run:
+
+```bash
+python scripts/compare_prompt_versions.py
+```
+
+This compares configured assistant instruction versions against the same golden evaluation cases.
+
+It reports:
+
+* pass/fail by prompt version
+* expected vs actual intent
+* handoff decision
+* risk flags
+* answer word count
+* voice suitability
+* retrieved articles
+* tool calls
+* output safety status
+
+It writes:
+
+```text
+reports/prompt_version_comparison.json
+reports/prompt_version_comparison.md
+```
+
+This is useful for release governance because prompt changes can be checked before promotion.
+
+---
+
+## Observability journey metrics
+
+Run:
+
+```bash
+python scripts/observability_report.py
+```
+
+This generates a local observability export across representative customer-service journeys.
+
+It reports:
+
+* journey name
+* detected intent
+* risk flags
+* handoff decision
+* handoff queue
+* Connect-style next action
+* recommended next action
+* retrieved article IDs
+* tool calls
+* output safety status
+* answer word count
+* prompt version
+* model provider
+
+It writes:
+
+```text
+reports/observability_journey_metrics.json
+reports/observability_journey_metrics.md
+```
+
+Example summary:
+
+```text
+10 journeys checked
+10 passed
+5 self-service journeys
+5 human-handoff journeys
+```
+
+---
+
 ## Test with curl
 
 ```bash
@@ -245,11 +334,13 @@ PROMPT_VERSION=utility_assistant_v1
 
 Local mode uses deterministic responses, which makes it suitable for:
 
-- regression tests
-- golden-case evaluations
-- CI checks
-- behaviour design
-- safe local development
+* regression tests
+* golden-case evaluations
+* CI checks
+* behaviour design
+* prompt release governance
+* local observability reports
+* safe local development
 
 ---
 
@@ -276,6 +367,24 @@ BEDROCK_MODEL_ID=<your-enabled-model-id>
 Then restart the app.
 
 Local mode should remain the default for tests and CI.
+
+---
+
+## CI validation
+
+GitHub Actions runs the project validation gate on push and pull request.
+
+The CI workflow checks:
+
+* public safety scan
+* regression tests
+* golden-case evals
+* journey safety report
+* Lex/Lambda-style simulation
+* prompt-version comparison
+* observability journey metrics
+
+This keeps behaviour changes visible and prevents unsafe changes from being merged silently.
 
 ---
 
@@ -308,10 +417,19 @@ evals/
   golden_cases.jsonl
   run_evals.py
 
+reports/
+  prompt_version_comparison.json
+  prompt_version_comparison.md
+  observability_journey_metrics.json
+  observability_journey_metrics.md
+
 scripts/
   journey_report.py
   simulate_lex_high_bill.py
   simulate_high_bill_ivr.py
+  compare_prompt_versions.py
+  observability_report.py
+  check_public_safety.py
   test_bedrock.py
 
 tests/
@@ -375,6 +493,9 @@ python -m pytest
 python -m evals.run_evals
 python scripts/journey_report.py
 python scripts/simulate_lex_high_bill.py
+python scripts/compare_prompt_versions.py
+python scripts/observability_report.py
+python scripts/check_public_safety.py
 ```
 
 Run the app:
@@ -385,19 +506,30 @@ uvicorn app.main:app --reload --port 8001
 
 ---
 
+## Releases
+
+```text
+v0.1.0 — initial responsible AI orchestration lab
+v0.2.0 — public cleanup and CI validation
+v0.3.0 — prompt version comparison release gate
+v0.4.0 — observability and journey metrics report
+```
+
+---
+
 ## Public-safety note
 
 This repository uses fictional data, mocked tools and local knowledge articles.
 
 It does not contain:
 
-- real customer data
-- real account data
-- real supplier policy
-- real payment instructions
-- real emergency procedures
-- production credentials
-- production infrastructure configuration
+* real customer data
+* real account data
+* real supplier policy
+* real payment instructions
+* real emergency procedures
+* production credentials
+* production infrastructure configuration
 
 Do not commit `.env`, AWS credentials, logs, account IDs or real customer information.
 
@@ -406,3 +538,5 @@ Do not commit `.env`, AWS credentials, logs, account IDs or real customer inform
 ## License
 
 MIT License.
+
+
